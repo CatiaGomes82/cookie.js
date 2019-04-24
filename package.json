@@ -1,0 +1,20 @@
+{
+  "name": "client-detect",
+  "version": "1.0.0",
+  "description": "The client detect library creates a client object with information about devices, browsers, operating systems and feature support. This facilitates cross compatibility.",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-terser": "^1.1.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatiaGomes82/cookie.js.git"
+  },
+  "author": "Catia Gomes",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/CatiaGomes82/cookie.js#readme"
+}

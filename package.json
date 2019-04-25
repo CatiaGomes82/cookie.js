@@ -1,7 +1,7 @@
 {
   "name": "client-detect",
   "version": "1.0.0",
-  "description": "The client detect library creates a client object with information about devices, browsers, operating systems and feature support. This facilitates cross compatibility.",
+  "description": "Lightweight library for handling cookies.",
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {

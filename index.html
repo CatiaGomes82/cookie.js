@@ -13,13 +13,39 @@
         <h2>Get Cookies</h2>
         <h3>cookie.get()</h3>
         <div id="get-all"></div>
-
         <h3>cookie.get('CookieName')</h3>
-        <div id="get-one">
-            <input id="cookie-name" type="text" name="CookieName" placeholder="Cookie Name" />
-            <input id="cookie-value" type="text" name="CookieName" placeholder="Cookie Value" />
+        <div>
+            <input id="cookie-name-get" type="text" name="CookieName" placeholder="Cookie Name" />
+            <button id="get-cookie">Get cookie value</button>
+        </div>
+        <div id="get-cookie"></div>
+    </section>
+    <section>
+        <h2>Set Cookies</h2>
+        <h3>cookie.set('Cookie name', 'Cookie value', opts)</h3>
+        <div>
+            <input id="cookie-name-set" type="text" name="CookieName" placeholder="Cookie Name" />
+            <input id="cookie-value-set" type="text" name="CookieValue" placeholder="Cookie Value" />
+            <input id="cookie-expiry-set" type="text" name="CookieValue" placeholder="Expiry" />
+            <input id="cookie-path-set" type="text" name="CookieValue" placeholder="Path" />
+            <input id="cookie-domain-set" type="text" name="CookieValue" placeholder="Domain" />
+            <input id="cookie-secure-set" type="text" name="CookieValue" placeholder="Secure" />
+            <div>
+                <label for="cookie-secure-set">Secure</label>
+                <label for="cookie-secure-set-true">True</label>
+                <input type="radio" name="cookie-secure-set" id="cookie-secure-set-true" value="true" />
+                <label for="cookie-secure-set-false">False</label>
+                <input type="radio" name="cookie-secure-set" id="cookie-secure-set-false" value="false" checked />
+            </div>
             <button id="add-cookie">Add cookie</button>
-
+        </div>
+    </section>
+    <section>
+        <h2>Remove Cookies</h2>
+        <h3>cookie.remove('Cookie name')</h3>
+        <div>
+            <input id="cookie-name-remove" type="text" name="CookieName" placeholder="Cookie Name" />
+            <button id="remove-cookie">Remove cookie</button>
         </div>
     </section>
     <script src="/src/cookie.js"></script>
@@ -43,17 +69,51 @@
 
         function addCookie() {
             document.getElementById('add-cookie').addEventListener('click', function () {
-                window.cookie.set(document.getElementById('cookie-name').value, document.getElementById('cookie-value').value)
+                var expiryVal = document.getElementById('cookie-expiry-set').value,
+                    domainVal = document.getElementById('cookie-domain-set').value,
+                    pathVal = document.getElementById('cookie-path-set').value,
+                    secureVal = (document.getElementById('cookie-expiry-set').value === 'true'),
+                    opts = {};
 
-                document.getElementById('cookie-name').value = '';
-                document.getElementById('cookie-value').value = '';
-                
+                if (expiryVal !== '') {
+                    opts.expiry = expiryVal;
+                }
+
+                if (domainVal !== '') {
+                    opts.domain = domainVal;
+                }
+
+                if (pathVal !== '') {
+                    opts.path = pathVal;
+                }
+
+                if (secureVal !== '') {
+                    opts.secure = secureVal;
+                }
+
+                window.cookie.set(document.getElementById('cookie-name-set').value, document.getElementById('cookie-value-set').value, opts)
+
+                document.getElementById('cookie-name-add').value = '';
+                document.getElementById('cookie-value-add').value = '';
+
                 getCookies();
             });
         }
+
+        function deleteCookie() {
+            document.getElementById('remove-cookie').addEventListener('click', function () {
+                window.cookie.delete(document.getElementById('cookie-name-remove').value)
+
+                document.getElementById('cookie-name-remove').value = '';
+
+                getCookies();
+            });
+        }
+
         addCookie();
         getCookies();
+        deleteCookie()
     </script>
-    </body>
+</body>
 
 </html>

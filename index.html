@@ -1,15 +1,59 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cookie.js</title>
 </head>
+
 <body>
+    <h1>Cookie.js</h1>
+    <section>
+        <h2>Get Cookies</h2>
+        <h3>cookie.get()</h3>
+        <div id="get-all"></div>
+
+        <h3>cookie.get('CookieName')</h3>
+        <div id="get-one">
+            <input id="cookie-name" type="text" name="CookieName" placeholder="Cookie Name" />
+            <input id="cookie-value" type="text" name="CookieName" placeholder="Cookie Value" />
+            <button id="add-cookie">Add cookie</button>
+
+        </div>
+    </section>
     <script src="/src/cookie.js"></script>
     <script>
-       console.log(cookie.get())
-       //cookie.set('qwer', 'qwerfcc')
+        function getCookies() {
+            var allCookies = window.cookie.get(),
+                allCookiesHTML = [];
+
+            if (allCookies === '') {
+                document.getElementById('get-all').innerHTML = '<p>There are no cookies</p>';
+                return;
+            }
+
+            for (var index = 0; index < allCookies.length; index += 1) {
+                var cookie = allCookies[index];
+                allCookiesHTML.push('<li>Name: ' + cookie.name + '; Value: ' + cookie.value + '</li>')
+            }
+
+            document.getElementById('get-all').innerHTML = '<ul>' + allCookiesHTML.join('') + '</ul>';
+        }
+
+        function addCookie() {
+            document.getElementById('add-cookie').addEventListener('click', function () {
+                window.cookie.set(document.getElementById('cookie-name').value, document.getElementById('cookie-value').value)
+
+                document.getElementById('cookie-name').value = '';
+                document.getElementById('cookie-value').value = '';
+                
+                getCookies();
+            });
+        }
+        addCookie();
+        getCookies();
     </script>
-</body>
+    </body>
+
 </html>
